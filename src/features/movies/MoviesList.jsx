@@ -7,7 +7,6 @@ function MoviesList() {
   return (
     <>
       <Heading textAlign="center" size="xl">
-        {" "}
         Trending movies
       </Heading>
       <SimpleGrid spacing={4} columns={{ sm: 1, md: 3, lg: 4 }}>
