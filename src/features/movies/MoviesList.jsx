@@ -1,16 +1,19 @@
-import { data } from "./data";
-import MovieCard from "./MovieCard";
+import { useSelector } from "react-redux";
 import { Heading, SimpleGrid } from "@chakra-ui/react";
 import { MOVIEDB_IMAGES_URL } from "src/common/constant";
+import MovieCard from "./MovieCard";
+import { selectAllMovies } from "./moviesSlice";
 
 function MoviesList() {
+  const movies = useSelector(selectAllMovies);
+
   return (
     <>
       <Heading textAlign="center" size="xl" mb={4}>
         Trending movies
       </Heading>
       <SimpleGrid spacing={4} columns={{ sm: 1, md: 3, lg: 4 }}>
-        {data.results.map((movie) => (
+        {movies.map((movie) => (
           <MovieCard
             key={movie.id}
             id={movie.id}
