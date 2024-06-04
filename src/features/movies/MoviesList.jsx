@@ -11,7 +11,7 @@ import {
 import { useEffect } from "react";
 
 function MoviesList() {
-  const dispatch = useDispatch().unwrap();
+  const dispatch = useDispatch();
   const toast = useToast();
   const movies = useSelector(selectAllMovies);
   const moviesStatus = useSelector(selectMoviesStatus);
@@ -20,7 +20,7 @@ function MoviesList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fetchMovies());
+        await dispatch(fetchMovies()).unwrap();
       } catch (err) {
         toast({
           title: "Failed to load movies",
