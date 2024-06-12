@@ -1,3 +1,5 @@
+//
+import { useSelector } from "react-redux";
 import {
   Box,
   Card,
@@ -9,17 +11,15 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { Link, useParams } from "react-router-dom";
-import { MOVIEDB_IMAGES_URL } from "src/common/constant";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { useSelector } from "react-redux";
-import { selectMovieById } from "./moviesSlice";
+import { Link, useParams } from "react-router-dom";
 import JokesGenerator from "src/features/ai-jokes/JokesGenerator";
+import { MOVIEDB_IMAGES_URL } from "src/common/constant";
+import { selectMovieById } from "./moviesSlice";
 
 function MovieDetails() {
   const { movieId } = useParams();
   const movie = useSelector((state) => selectMovieById(state, movieId));
-
   return (
     <Box minH="100vh">
       <Link to="/">
@@ -43,11 +43,9 @@ function MovieDetails() {
           src={`${MOVIEDB_IMAGES_URL}/${movie.poster_path}`}
           alt={`${movie.title}'s poster`}
         />
-
         <Stack>
           <CardBody>
             <Heading size="md">{movie.title}</Heading>
-
             <Text py="2">{movie.overview}</Text>
           </CardBody>
 

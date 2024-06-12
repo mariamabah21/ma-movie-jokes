@@ -13,7 +13,14 @@ const initialState = {
 
 export const fetchJoke = createAsyncThunk(
   "aiJokes/fetchJoke",
-  async ({ movieId, movieTitle, movieDescription }) => {
+  async ({ movieId, movieTitle, movieDescription }, thunkApi) => {
+    const state = thunkApi.getState();
+    const joke = selectJokeByMovieId(state, movieId);
+    const rules = selectJokesRules(state);
+    const rulesParams = rules.reduce(
+      (acc, rule) => `${acc}${rule.name}: ${rule.description}\n`,
+      ""
+    );
     const messages = [
       {
         role: "user",
@@ -21,24 +28,29 @@ export const fetchJoke = createAsyncThunk(
       },
     ];
 
-    return { movieId, joke: "Funny joke!" };
+    if (joke) {
+      messages.unshift({
+        role: "user",
+        content: `Don't use joke: ${joke.joke}`,
+      });
+    }
+
+    const response = await axios.post(
+      OPENAI_COMPLETETIONS_API_URL,
+      {
+        messages,
+        model: "gpt-3.5-turbo",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+        },
+      }
+    );
+    console.log(response);
+    return { movieId, joke: response.data.choices[0].message.content };
   }
 );
-
-const response = await axios.post(
-  OPENAI_COMPLETETIONS_API_URL,
-  {
-    messages,
-    model: "gpt-3.5-turbo",
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-    },
-  }
-);
-
-console.log(response);
 
 const aiJokesSlice = createSlice({
   name: "ai-jokes",
