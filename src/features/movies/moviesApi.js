@@ -26,4 +26,4 @@ export const moviesApi = createApi({
   }),
 });
 
-export const { useGetMoviesQuery, useGetMovieByIdQuery } = moviesApi;
+export const { useGetMoviesQuery, useGetMovieQuery, useGetMovieByIdQuery } = moviesApi;

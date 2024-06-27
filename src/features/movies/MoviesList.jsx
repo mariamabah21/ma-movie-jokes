@@ -1,12 +1,11 @@
 import { Flex, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { MOVIEDB_IMAGES_URL } from "src/common/constant";
 import MovieCard from "./MovieCard";
-import {
-  useGetMovieQuery,
-} from "./moviesSlice";
+import { useGetMoviesQuery } from "./moviesApi";
+
 
 function MoviesList() {
- const { data, isError, error, isLoading, isSuccess } = useGetMovieQuery();
+ const { data, isError, error, isLoading, isSuccess } = useGetMoviesQuery();
  
   let content;
   if (isSuccess) {
@@ -32,10 +31,12 @@ function MoviesList() {
   } else if (isError) {
     content = (
       <Flex alignItems="center" justifyContent="center" minH="100vh">
-        {error}
+        {error?.data?.status_message ?? "Something went wrong"}
+
       </Flex>
     );
   }
+
   return (
     <>
       <Heading textAlign="center" size="xl" mb={4}>
