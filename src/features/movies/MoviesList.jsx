@@ -2,18 +2,17 @@ import { Flex, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { MOVIEDB_IMAGES_URL } from "src/common/constant";
 import MovieCard from "./MovieCard";
 import {
-  useGetMovieByIdQuery,
+  useGetMovieQuery,
 } from "./moviesSlice";
-import { useEffect } from "react";
 
 function MoviesList() {
- const { data, isError, error, isLoading, isSuccess } = useGetMovieByIdQuery();
+ const { data, isError, error, isLoading, isSuccess } = useGetMovieQuery();
  
   let content;
   if (isSuccess) {
     content = (
       <SimpleGrid spacing={4} columns={{ sm: 1, md: 3, lg: 4 }}>
-        {movies.map((movie) => (
+        {data.map((movie) => (
           <MovieCard
             key={movie.id}
             id={movie.id}

@@ -1,6 +1,6 @@
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { MOVIEDB_API_URL } from "src/common/constants";
+import { MOVIEDB_API_URL } from "src/common/constant";
 
 export const moviesApi = createApi({
   reducerPath: "moviesApi",
