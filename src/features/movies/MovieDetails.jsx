@@ -65,8 +65,8 @@ function MovieDetails() {
   } else if (isError) {
     content = (
       <Flex alignItems="center" justifyContent="center">
-        {error?.data?.status_message ?? "Something went wrong"}
-      </Flex>
+          {error}   
+     </Flex>
     );
   }
 
@@ -81,9 +81,8 @@ function MovieDetails() {
           borderColor="gray.300"
           icon={<ArrowBackIcon />}
         />
-        {content}
       </Link>
-
+      {content}
     </Box>
   );
 }
