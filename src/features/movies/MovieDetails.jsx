@@ -16,11 +16,11 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Link, useParams } from "react-router-dom";
 import JokesGenerator from "src/features/ai-jokes/JokesGenerator";
 import { MOVIEDB_IMAGES_URL } from "src/common/constant";
-import { useGetMoviesByIdQuery } from "./moviesApi";
+import { useGetMovieByIdQuery } from "./moviesApi";
 
 function MovieDetails() {
   const { movieId } = useParams();
-  const { data, isError, error, isLoading, isSuccess } = useGetMoviesByIdQuery(movieId);
+  const { data, isError, error, isLoading, isSuccess } = useGetMovieByIdQuery(movieId);
   
   let content;
   if (isSuccess) {
